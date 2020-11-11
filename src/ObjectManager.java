@@ -13,7 +13,7 @@ enum ScoreCategory {
     CULTURE
 }
 
-public class UpdateDirtyUsers {
+public class ObjectManager {
     public static double defaultScoreValue = 0.5;
     public static long sleepTime = 30000; //ms
     
@@ -22,7 +22,8 @@ public class UpdateDirtyUsers {
 
     public static void main (String[] args) throws Exception{
         while(true){
-        ArrayList<String> dirtyUsers = Res.getDirtyUsers(); // TODO: Handle duplicate users
+            // Update dirty users
+        ArrayList<String> dirtyUsers = Res.getColFromTable("dirtyusers", "userId"); // TODO: Handle duplicate users
         ArrayList<User> userList = new ArrayList<>();
 
         // For each user, figure out which values need to be updated
@@ -46,7 +47,6 @@ public class UpdateDirtyUsers {
                 double defaultDelta = 0.125;
                 String answer = user.questionAnswerTable.get(questionId);
                 switch(questionId){
-                    //TODO: is there a way to not have to write out every case?
                     case 1:
                         // Do you wear a watch?
                         Res.updateCategoryScoreTableBinary(user, ScoreCategory.FINANCE, answer, defaultDelta);
@@ -121,10 +121,14 @@ public class UpdateDirtyUsers {
         // To start, sum up all the scores, set confidence to 0, and add category
 
         for (User user : userList) {
-            Res.removeOldScores(user);
-            Res.insertScores(user);
-            Res.deleteDirtyUser(user);
+            user.update();
         }
+
+        // Next, we need to remove redundant entries from answers 
+        //TODO: replace duplicate answer entries
+
+        
+
         System.out.println("Done updating dirty users. Sleeping for " + sleepTime/1000 + " seconds...");
         Thread.sleep(sleepTime);
 

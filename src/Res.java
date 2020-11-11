@@ -27,11 +27,11 @@ public class Res {
         return null; // This will only hit if there's an error
     }
 
-    public static ArrayList<String> getDirtyUsers() throws Exception {
+    public static ArrayList<String> getColFromTable(String tableName, String colName) throws Exception {
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT * FROM dirtyUsers";
+            String sql = "SELECT * FROM " + tableName + ";";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
@@ -39,7 +39,7 @@ public class Res {
 
             while(resultSet.next()) {
                 // System.out.println(resultSet.getString("userId"));
-                resultIds.add(resultSet.getString("userId"));
+                resultIds.add(resultSet.getString(colName));
             }
 
             System.out.println("All records have been selected");
@@ -99,20 +99,6 @@ public class Res {
         }
         return null;
     }
-
-    public static void deleteDirtyUser(User user) {
-        try {
-            Connection conn = Res.getConnection();
-            String sql = "DELETE FROM dirtyusers WHERE userId=" + user.id; // TODO: not working
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.executeUpdate();
-            System.out.println("Successfully deleted user " + user + " from dirtyUsers");
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
     
 
     public static void updateCategoryScoreTableBinary(User user, ScoreCategory scoreCategory, String answer, double delta){
@@ -125,46 +111,8 @@ public class Res {
         user.categoryScoreTable.put(scoreCategory, user.categoryScoreTable.get(ScoreCategory.FINANCE) + delta);
     }
 
-    public static void removeOldScores(User user){
-        try {
-            Connection conn = getConnection();
-            String sql = "DELETE FROM scores WHERE userId=" + user.id +";";
-            PreparedStatement statement = conn.prepareStatement(sql);
-                statement.executeUpdate();
-                System.out.println("Successfully deleted old scores for user " + user.id);
-
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
-    public static void insertScores(User user){
-        int userId = user.id;
-        for(ScoreCategory category : user.categoryScoreTable.keySet()){
-            try {
-                Connection conn = getConnection();
-                double scoreValue = user.categoryScoreTable.get(category);
-
-                // DEFAULT
-                double confidence = 0;
-
-                // TODO: Steralize SQL
-                String sql = "INSERT INTO scores (userId, category, value, confidence) VALUES ("+ 
-                userId + ",\'" +
-                category.toString() + "\'," + 
-                scoreValue + "," +
-                confidence+ ");";
-
-                PreparedStatement statement = conn.prepareStatement(sql);
-                statement.executeUpdate();
     
-                System.out.println("Successfully added " + category.toString() +" score for user " + userId);
+
     
-            } catch (Exception e){
-                System.out.println(e);
-            }
-        }
-        
-    }
     
 }
