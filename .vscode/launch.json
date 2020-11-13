@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - UpdateManager",
+            "request": "launch",
+            "mainClass": "UpdateManager",
+            "projectName": "MunchkinLabsApp_ac383e9d"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ReccomendEndpoint",
+            "request": "launch",
+            "mainClass": "ReccomendEndpoint",
+            "projectName": "MunchkinLabsApp_ac383e9d"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ObjectManager",
+            "request": "launch",
+            "mainClass": "ObjectManager",
+            "projectName": "MunchkinLabsApp_ac383e9d"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - App",
             "request": "launch",
             "mainClass": "App",

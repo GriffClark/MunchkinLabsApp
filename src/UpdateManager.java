@@ -13,12 +13,9 @@ enum ScoreCategory {
     CULTURE
 }
 
-public class ObjectManager {
+public class UpdateManager {
     public static double defaultScoreValue = 0.5;
     public static long sleepTime = 30000; //ms
-    
-
-    
 
     public static void main (String[] args) throws Exception{
         while(true){
@@ -49,62 +46,62 @@ public class ObjectManager {
                 switch(questionId){
                     case 1:
                         // Do you wear a watch?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.FINANCE, answer, defaultDelta);
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.EXTRAVAGANT, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "FINANCE", answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "EXTRAVAGANT", answer, defaultDelta);
                         break;
 
                     case 2:
                         // Do you enjoy camping?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.ADVENTUROUS, answer, defaultDelta);
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.ACTIVE, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "ADVENTUROUS", answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "ACTIVE", answer, defaultDelta);
                         break;
 
                     case 3:
                         // Are you over 35 years old?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.EXTRAVAGANT, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "EXTRAVAGANT", answer, defaultDelta);
                         break;
 
                     case 4:
                         // Do you enjoy traveling?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.ADVENTUROUS, answer, defaultDelta);
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.CULTURE, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "ADVENTUROUS", answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "CULTURE", answer, defaultDelta);
                         break;
 
                     case 5:
                         // Do you enjoy big groups?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.GROUPSIZE, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "GROUPSIZE", answer, defaultDelta);
                         break;
 
                     case 6:
                         // Do you enjoy spending time in nature?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.BIRDWATCHER, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "BIRDWATCHER", answer, defaultDelta);
                         break;
 
                     case 7:
                         // Do you enjoy hiking in nature?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.ACTIVE, answer, defaultDelta);
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.BIRDWATCHER, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "ACTIVE", answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "BIRDWATCHER", answer, defaultDelta);
                         break;
 
                     case 8:
                         // Do you generally enjoy spending lots of time with people?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.GROUPSIZE, answer, defaultDelta);
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.LENGTH, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "GROUPSIZE", answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "LENGTH", answer, defaultDelta);
                         break;
 
                     case 9:
                         // Do you like animals?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.BIRDWATCHER, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "BIRDWATCHER", answer, defaultDelta);
                         break;
 
                     case 10:
                         // Do you enjoy meuseums?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.EXTRAVAGANT, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "EXTRAVAGANT", answer, defaultDelta);
                         break;
 
                     case 11:
                         // Do you enjoy authentic foreign foods?
-                        Res.updateCategoryScoreTableBinary(user, ScoreCategory.CULTURE, answer, defaultDelta);
+                        Res.updateCategoryScoreTableBinary(user, "CULTURE", answer, defaultDelta);
                         break;
 
                     
