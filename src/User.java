@@ -5,13 +5,12 @@ import java.util.Hashtable;
 public class User {
         int id;
         Hashtable<Integer, String> questionAnswerTable = new Hashtable<>(); // questionId:answer. Answer stored as a string to handle all answer types
-        Hashtable<String, Double> categoryScoreTable = new Hashtable<>();  // category:score
-
+        Vector personalityVector = new Vector();
         public User() {
 
             // Init the categories we can use to score our users
             for(ScoreCategory scoreCategory : ScoreCategory.values()) {
-                categoryScoreTable.put(scoreCategory.toString(), 0.5);
+                personalityVector.categoryScoreTable.put(scoreCategory.toString(), 0.5);
             }
         }
 
@@ -58,10 +57,10 @@ public class User {
         }
 
         private void insertScores(){
-            for(String category : categoryScoreTable.keySet()){
+            for(String category : personalityVector.categoryScoreTable.keySet()){
                 try {
                     Connection conn = Res.getConnection();
-                    double scoreValue = categoryScoreTable.get(category);
+                    double scoreValue = personalityVector.categoryScoreTable.get(category);
     
                     // DEFAULT
                     double confidence = 0;

@@ -56,10 +56,11 @@ public class Res {
             for(String id: ids){
                 User user = new User();
                 user.id = Integer.parseInt(id);
-                ResultSet resultSet = execSQL("SELECT * FROM scores WHERE id=" + id + ";"); 
+                ResultSet resultSet = execSQL("SELECT * FROM scores WHERE userId=" + id + ";"); 
                 while(resultSet.next()){ 
-                    user.categoryScoreTable.put(resultSet.getString("category"), Double.parseDouble(resultSet.getString("value")));
+                    user.personalityVector.categoryScoreTable.put(resultSet.getString("category"), Double.parseDouble(resultSet.getString("value")));
                 }
+                results.add(user);
             }
             return results;
         } catch (Exception e) {
@@ -140,7 +141,7 @@ public class Res {
                     endpointVectors.put(endpointVectorRS.getString("vectorName"), Double.parseDouble(endpointVectorRS.getString("value")));
                 }
 
-                Endpoint endpoint = new Endpoint(id, name, url, endpointVectors);
+                Endpoint endpoint = new Endpoint(id, name, url, new Vector(endpointVectors));
                 endpoints.add(endpoint);
             }
 
@@ -160,7 +161,7 @@ public class Res {
         if(Integer.parseInt(answer) == 0){  // The user said no
             delta *= -1; 
         }
-        user.categoryScoreTable.put(scoreCategory, user.categoryScoreTable.get(scoreCategory) + delta);
+        user.personalityVector.categoryScoreTable.put(scoreCategory, user.personalityVector.categoryScoreTable.get(scoreCategory) + delta);
     }
 
     
