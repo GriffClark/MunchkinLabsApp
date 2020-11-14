@@ -7,10 +7,9 @@ public class ReccomendEndpoint {
     
     public static void main(String[] args) throws Exception{
         // args will contian user ids
-        String[] testIds = {"11","7"};
+        String[] testIds = {"12","14"};
 
         // This will contain each user's distance from a vector as a distanceVector
-        Hashtable<Integer, Double> idDistanceTable = new Hashtable<>(); // We don't care which user it's distanced from, just which vector it is
 
         ArrayList<User> users = Res.getUsers(testIds);
         ArrayList<Endpoint> endpoints = Res.getAllEndpoints();
@@ -19,11 +18,15 @@ public class ReccomendEndpoint {
         for(User user : users){
             for(Endpoint endpoint : endpoints){
                 double oldValue = 0;
-                if(idDistanceTable.get(endpoint.id) != null){
-                    oldValue = idDistanceTable.get(endpoint.id);
-                }
-                idDistanceTable.put(endpoint.id, (user.personalityVector.getDistanceFrom(endpoint.vector)+ oldValue)); //all values here should be positive
+                user.vectorDistanceTable.put(endpoint.id, (user.personalityVector.getDistanceFrom(endpoint.vector)+ oldValue)); //all values here should be positive
             }
+        }
+
+        // We'll use the first user's table 
+        Hashtable<Integer, Double> idDistanceTable = new Hashtable<>(); // Stores each vector with the combined distance from both users
+
+        for(User user : users){
+            user.vectorDistanceTable.forEach((key, value) -> idDistanceTable.merge(key, value, (v1, v2) -> (v1 == v2) ? v1 : v1 + v2)); 
         }
 
         Set<Integer> keys = idDistanceTable.keySet();
@@ -37,7 +40,7 @@ public class ReccomendEndpoint {
             }
         }
 
-        System.out.println(endpoints.get(lowestVectorId).name);
+        System.out.println("\nYou should go to: " + endpoints.get(lowestVectorId).name);
     }
 
 

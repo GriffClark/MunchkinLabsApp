@@ -6,6 +6,7 @@ public class User {
         int id;
         Hashtable<Integer, String> questionAnswerTable = new Hashtable<>(); // questionId:answer. Answer stored as a string to handle all answer types
         Vector personalityVector = new Vector();
+        Hashtable<Integer, Double> vectorDistanceTable = new Hashtable<>(); // this should be computed regularly TODO:
         public User() {
 
             // Init the categories we can use to score our users
